@@ -1,4 +1,6 @@
-let Users = require('../database/models/things')
+require('../../utils/database/connection');
+let Users = require('../../utils/database/models/users');
+
 
 let error = err => {
   console.log('err', err)
@@ -10,7 +12,7 @@ module.exports = {
   //get all users
   getUsers : () =>{
     Users.find({}).then(users =>{
-      res.json(things)
+      res.json(users)
     }).catch(err =>{
       return error(err)
     })
