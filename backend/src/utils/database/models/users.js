@@ -4,8 +4,8 @@ const Users = collection.model('Users',{
     firstName: String,
     lastName: String,
     birthday: Date,
-    isActive: {type :Boolean, default: 'true'} ,
+    isActive: Boolean,
     password: String
 })
 
-module.exports = Users 
+module.exports = Users;
