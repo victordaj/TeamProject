@@ -4,7 +4,7 @@ const Users = collection.model('Users',{
     firstName: String,
     lastName: String,
     birthday: Date,
-    isActive: Boolean,
+    isActive: Boolean,default: true ,
     password: String
 })
 
