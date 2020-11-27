@@ -9,7 +9,7 @@ let error = err => {
 }
 
 router.post('/', function(req, res, next){
-  logic.createUser(req).then(() => {
+  logic.createUser(req.body).then(() => {
     res.end("User succesfully created")
   }).catch(err => {
     return error(err)
@@ -33,7 +33,7 @@ router.get('/:USERS_ID', function(req, res, next){
 });
 
 router.put('/:USERS_ID', function(req, res, next){
-  logic.updateUser(req).then(() => {
+  logic.updateUser(req.params.USERS_ID,req.body).then(() => {
     res.end("User succesfully updated")
   }).catch(err => {
     return error(err)

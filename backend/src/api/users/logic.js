@@ -5,7 +5,7 @@ let Users = require('../../utils/database/models/users');
 module.exports = {
   //get all users
   getUsers : () =>{
-    return Users.find({})
+    return Users.find({isActive : true})
   },
   //get user by id
   getUser : id => {
@@ -18,20 +18,20 @@ module.exports = {
     })
   },
   //update user by id
-  updateUser : req => {
-    return Users.findByIdAndUpdate(req.params.USERS_ID, {
-      $set: req.body
+  updateUser : (id,body) => {
+    return Users.findByIdAndUpdate(id, {
+      $set: body
     })
   },
 
   //create user
-  createUser : req =>{
+  createUser : body =>{
     return Users.create({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      birthday: new Date(),
-      isActive: req.body.isActive,
-      password: req.body.password
+      firstName: body.firstName,
+      lastName: body.lastName,
+      birthday: body.birthday,
+      isActive: body.isActive,
+      password: body.password
     })
   }
 }
