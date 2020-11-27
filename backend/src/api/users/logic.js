@@ -30,7 +30,6 @@ module.exports = {
       firstName: body.firstName,
       lastName: body.lastName,
       birthday: body.birthday,
-      isActive: body.isActive,
       password: body.password
     })
   }
