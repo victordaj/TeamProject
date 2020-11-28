@@ -7,7 +7,7 @@ class CreateUser extends React.Component {
         firstName : '',
         lastName : '',
         password : '',
-        date : ''
+        birthday : ''
     }
 
     onChange = event =>{
@@ -16,12 +16,12 @@ class CreateUser extends React.Component {
         })
     }
 
-    submitForm = () =>{
+    submitForm = () => {
         this.props.onCreate({
-            firstName : this.state.name,
-            lastName : this.state.comment,
+            firstName : this.state.firstName,
+            lastName : this.state.lastName,
             password : this.state.password,
-            date : this.state.date
+            birthday : new Date(this.state.birthday)
         })
     }
 
@@ -30,7 +30,7 @@ class CreateUser extends React.Component {
                     <p><input name='firstName' type='text' onChange={this.onChange} value={this.state.firstName} placeholder='Please enter your firstname' /></p>
                     <p><input name='lastName' type='text' onChange={this.onChange} value={this.state.lastName} placeholder='Please enter your lastname' /></p>
                     <p><input name='password' type='text' onChange={this.onChange} value={this.state.password} placeholder="Enter a password" /></p>
-                    <p><input name='date' type='date' onChange={this.onChange} value={this.state.date} placeholder='Enter your birthday date' /></p>
+                    <p><input name='birthday' type='date' onChange={this.onChange} value={this.state.date} placeholder='Enter your birthday date' /></p>
                     
                     <button onClick={this.submitForm}>Submit</button>
                 </div>
