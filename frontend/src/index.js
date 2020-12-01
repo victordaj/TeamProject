@@ -10,6 +10,7 @@ const routing = (
     <div>
       <Link to="/users">Users</Link> 
       <Route path = "/users" component={App} />
+      <Route path = "/update" component={UpdateUser} />
     </div>
   </Router>
 )

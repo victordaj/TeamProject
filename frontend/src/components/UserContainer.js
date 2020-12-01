@@ -2,7 +2,7 @@ import CreateUser from './CreateUser';
 import UserList from './UserList';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from './utils/axios';
+import axios from '../utils/axios';
 
 class UserContainer extends React.Component {
 
