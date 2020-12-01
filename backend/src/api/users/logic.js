@@ -5,7 +5,7 @@ let Users = require('../../utils/database/models/users');
 module.exports = {
   //get all users
   getUsers : () =>{
-    return Users.find({isActive : true})
+    return Users.find({ isActive: true })
   },
   //get user by id
   getUser : id => {
