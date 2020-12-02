@@ -3,14 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
+import { Router, Switch, Route, Link } from 'react-router-dom';
+import UpdateUser from './components/UpdateUser';
+import history from './utils/history';
 
 const routing = (
-  <Router>
+  <Router history={history}>
     <div>
-      <Link to="/users">Users</Link> 
-      <Route path = "/users" component={App} />
-      <Route path = "/update" component={UpdateUser} />
+      <Switch>
+        <Route path = "/users" exact component={App} />
+        <Route path = "/update" component={UpdateUser} /> 
+      </Switch>
     </div>
   </Router>
 )

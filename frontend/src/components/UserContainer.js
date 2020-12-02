@@ -3,6 +3,7 @@ import UserList from './UserList';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from '../utils/axios';
+import history from '../utils/history';
 
 class UserContainer extends React.Component {
 
@@ -16,7 +17,7 @@ class UserContainer extends React.Component {
   }
 
   getUsers = () => {
-    axios.get('/users').then(response => {
+    axios.get('/users/').then(response => {
       this.setState({userInput: response.data})
     }).catch(err => {
       this.error(err)
@@ -44,19 +45,7 @@ class UserContainer extends React.Component {
   }
 
   updateUser = userId => {
-    let firstName = window.prompt("First name");
-    let lastName = window.prompt("Last name");
-    let password = window.prompt("Password")
-    if(firstName && lastName && password) {
-      axios.put('/users/' + userId, {
-        firstName: firstName, 
-        lastName: lastName, 
-        password: password }).then(() => {
-          this.getUsers();
-        }).catch(err => {
-          this.error(err);
-        })
-    } else alert("Please complete all the fields")
+    history.push('/update/' + userId);
   }
 
   componentDidMount() {
