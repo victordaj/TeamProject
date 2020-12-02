@@ -1,10 +1,8 @@
 import React from 'react';
-
 import ReactDOM from 'react-dom';
-
 import axios from '../utils/axios'
-
 import history from '../utils/history';
+
 
 
 class UpdateUser extends React.Component {
@@ -12,12 +10,14 @@ class UpdateUser extends React.Component {
         firstName : '',
         lastName : '',
         password : '',
-        birthday : ''
+        birthday : '',
+        formattedDate: ''
     }
 
     getUser = userId => {
         axios.get('/users/' + userId).then(response => {
           this.setState({ ...response.data })
+          this.formatDate(new Date(this.state.birthday))
         }).catch(err => {
           console.log('eroare');
         })
@@ -33,6 +33,11 @@ class UpdateUser extends React.Component {
         this.setState({
             [event.target.name] : event.target.value
         })
+    }
+
+    formatDate = birthday => {
+        let date = birthday.toISOString().substr(0, 10);
+        this.setState({ formattedDate: date })
     }
 
     submitForm = () => {
@@ -57,7 +62,7 @@ class UpdateUser extends React.Component {
                     <p><input name='firstName' type='text' value = {this.state.firstName} onChange={this.onChange} /></p>
                     <p><input name='lastName' type='text' value = {this.state.lastName} onChange={this.onChange}   /></p>
                     <p><input name='password' type='text' value = {this.state.password} onChange={this.onChange}   /></p>
-                    <p><input name='birthday' type='date' value = {this.state.birthday} onChange={this.onChange}  /></p>
+                    <p><input name='birthday' type='date' defaultValue = {this.state.formattedDate} onChange={this.onChange}  /></p>
                     
                     <button onClick={this.submitForm}>Submit</button>
                 </div>

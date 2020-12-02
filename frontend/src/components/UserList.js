@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom';
 
 class UserList  extends React.Component {
 
+    formatDate = birthday => {
+        let formatted_date = birthday.getDate() + '/' + (birthday.getMonth()+1) + '/' + birthday.getFullYear();
+        return formatted_date;
+    }
+
     render() { 
         return (<div>
             <h1>
@@ -15,7 +20,7 @@ class UserList  extends React.Component {
                         <br/>
                         Last Name: {user.lastName}
                         <br/>
-                        Birthday: {user.birthday}
+                        Birthday: {this.formatDate(new Date(user.birthday))}
                         <br/>
                         isActive: {user.isActive.toString()}
                         <br/>
