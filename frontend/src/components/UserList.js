@@ -36,7 +36,7 @@ const StyledTableCell = withStyles((theme) => ({
   });
 
 
-class UserList  extends React.Component {
+class UserList  extends React.Component {hur
     formatDate = birthday => {
         let formatted_date = birthday.getDate() + '/' + (birthday.getMonth()+1) + '/' + birthday.getFullYear();
         return formatted_date;
@@ -51,13 +51,14 @@ class UserList  extends React.Component {
                 <Table  aria-label="customized table">
                     <TableHead>
                         <TableRow>
-                            <StyledTableCell>FirstName</StyledTableCell>
-                            <StyledTableCell align="right">LastName</StyledTableCell>
+                            <StyledTableCell>First Name</StyledTableCell>
+                            <StyledTableCell align="right">Last Name</StyledTableCell>
                             <StyledTableCell align="right">Password</StyledTableCell>
                             <StyledTableCell align="right">Birthday</StyledTableCell>
                             <StyledTableCell align="right">isActive</StyledTableCell>
                             <StyledTableCell align="right">Delete</StyledTableCell>
                             <StyledTableCell align="right">Update</StyledTableCell>
+                            <StyledTableCell align="right">Check Items</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -70,6 +71,7 @@ class UserList  extends React.Component {
                                 <StyledTableCell align="right">{user.isActive.toString()}</StyledTableCell>
                                 <StyledTableCell align="right"><button onClick={() => this.props.onDelete(user._id)}> Delete </button></StyledTableCell>
                                 <StyledTableCell align="right"><button onClick={() => this.props.onUpdate(user._id)}> Update </button></StyledTableCell>
+                                <StyledTableCell align="right"><button onClick={() => this.props.onCheck(user._id)}> Check Items </button></StyledTableCell>
 
                                 
                                 

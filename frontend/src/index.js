@@ -3,22 +3,23 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Router, Switch, Route, Link } from 'react-router-dom';
+import {Router, Switch, Route } from 'react-router-dom';
 import UpdateUser from './components/UpdateUser';
 import history from './utils/history';
+import UserContainer from './components/UserContainer';
 
 const routing = (
   <Router history={history}>
-    <div>
       <Switch>
-        <Route path = "/users" exact component={App} />
-        <Route path = "/update" component={UpdateUser} /> 
+        <Route exact path = "/" component={App} />
+        <Route exact path = "/users" component={UserContainer} />
+        <Route exact path = "/users/:id" component={UpdateUser} />
       </Switch>
-    </div>
   </Router>
-)
+) 
 
 ReactDOM.render(routing, document.getElementById('root'));
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

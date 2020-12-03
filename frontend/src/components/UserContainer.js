@@ -24,6 +24,8 @@ class UserContainer extends React.Component {
     })
   }
 
+  
+
   deleteUser = userId => {
     if(window.confirm("Are you sure?")) {
       axios.put('/users/' + userId, { isActive: false}).then(() => {
@@ -45,7 +47,11 @@ class UserContainer extends React.Component {
   }
 
   updateUser = userId => {
-    history.push('/update/' + userId);
+    history.push('/users/' + userId);
+  }
+
+  checkItems = userId => {
+    history.push('/users/' + userId + '/items/');
   }
 
   componentDidMount() {
@@ -56,7 +62,7 @@ class UserContainer extends React.Component {
     return (
       <div>
         <CreateUser onCreate={this.createUser} />
-        <UserList list={this.state.userInput} onDelete={this.deleteUser} onUpdate={this.updateUser} />
+        <UserList list={this.state.userInput} onDelete={this.deleteUser} onUpdate={this.updateUser} onCheck = {this.checkItems} />
       </div>
     )
   }

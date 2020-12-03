@@ -24,9 +24,9 @@ class UpdateUser extends React.Component {
       }
 
     componentDidMount() {
-        let aux = window.location.pathname.split('/')
-        let id = aux[aux.length - 1]
-        this.getUser(id)
+        let userID = this.props.match.params.id;
+        console.log(userID);
+        this.getUser(userID);
     }
 
     onChange = event =>{

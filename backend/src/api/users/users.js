@@ -32,7 +32,7 @@ router.get('/:USERS_ID', function(req, res, next){
   })
 });
 
-router.put('/update/:USERS_ID', function(req, res, next){
+router.put('/users/:USERS_ID', function(req, res, next){
   logic.updateUser(req.params.USERS_ID,req.body).then(() => {
     res.end("User succesfully updated")
   }).catch(err => {
