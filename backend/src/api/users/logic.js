@@ -1,8 +1,33 @@
 require('../../utils/database/connection');
 let Users = require('../../utils/database/models/users');
-
+let Items = require('../../utils/database/models/items');
+const { findByIdAndDelete } = require('../../utils/database/models/users');
 
 module.exports = {
+  //get all items
+  getItems : () =>{
+    return Items.find()
+  },
+  //get items of an user
+  getUserItems : id =>{
+    return Items.find({userID : id})
+  },
+  //create item
+  createItem : (body,id) =>{
+    return Items.create({
+      name : body.name,
+      description : body.description,
+      userID : id
+    })
+  },
+  //delte item
+  deleteItem : id =>{
+    return Items.findByIdAndDelete(id)
+  },
+  //get one item of an user
+  getOneItem : item_id =>{
+    return Items.findById(item_id)
+  },
   //get all users
   getUsers : () =>{
     return Users.find({ isActive: true })
