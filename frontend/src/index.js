@@ -7,6 +7,7 @@ import {Router, Switch, Route } from 'react-router-dom';
 import UpdateUser from './components/UpdateUser';
 import history from './utils/history';
 import UserContainer from './components/UserContainer';
+import ItemList from './components/ItemList';
 
 const routing = (
   <Router history={history}>
@@ -14,6 +15,7 @@ const routing = (
         <Route exact path = "/" component={App} />
         <Route exact path = "/users" component={UserContainer} />
         <Route exact path = "/users/:id" component={UpdateUser} />
+        <Route exact path = "/users/:id/items/" component={ItemList} />
       </Switch>
   </Router>
 ) 
