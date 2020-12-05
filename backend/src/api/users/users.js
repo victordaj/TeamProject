@@ -76,6 +76,14 @@ router.get('/:USERS_ID', function(req, res, next){
     return error(err)
   })
 });
+//Request to update an item
+router.put('/:USERS_ID/items/:ITEM_ID', function(req, res, next) {
+  logic.updateItem(req.params.ITEM_ID, req.body).then(() => {
+    res.end("Item succesfully updated")
+  }).catch(err => {
+    return error(err)
+  })
+})
 
 //Request to update an user
 router.put('/users/:USERS_ID', function(req, res, next){

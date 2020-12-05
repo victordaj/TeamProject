@@ -20,6 +20,11 @@ module.exports = {
       userID : id
     })
   },
+  updateItem : (id,body) => {
+    return Items.findByIdAndUpdate(id, {
+      $set: body
+    })
+  },
   //delte item
   deleteItem : id =>{
     return Items.findByIdAndDelete(id)
