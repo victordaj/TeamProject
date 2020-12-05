@@ -21,8 +21,6 @@ class ItemList extends React.Component {
     }
 
 
-
-
     render() { 
         return <div>
                 <h1>Items list</h1>

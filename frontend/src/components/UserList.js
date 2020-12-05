@@ -9,26 +9,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-
-
-const StyledTableCell = withStyles((theme) => ({
-    head: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-    },
-    body: {
-      fontSize: 14,
-    },
-  }))(TableCell);
-  
-  const StyledTableRow = withStyles((theme) => ({
-    root: {
-      '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-      },
-    },
-  }))(TableRow);
-
   const useStyles = theme =>({
     table: {
       minWidth: 700,
@@ -51,31 +31,31 @@ class UserList  extends React.Component {hur
                 <Table  aria-label="customized table">
                     <TableHead>
                         <TableRow>
-                            <StyledTableCell>First Name</StyledTableCell>
-                            <StyledTableCell align="right">Last Name</StyledTableCell>
-                            <StyledTableCell align="right">Password</StyledTableCell>
-                            <StyledTableCell align="right">Birthday</StyledTableCell>
-                            <StyledTableCell align="right">isActive</StyledTableCell>
-                            <StyledTableCell align="right">Delete</StyledTableCell>
-                            <StyledTableCell align="right">Update</StyledTableCell>
-                            <StyledTableCell align="right">Check Items</StyledTableCell>
+                            <TableCell>First Name</TableCell>
+                            <TableCell align="right">Last Name</TableCell>
+                            <TableCell align="right">Password</TableCell>
+                            <TableCell align="right">Birthday</TableCell>
+                            <TableCell align="right">isActive</TableCell>
+                            <TableCell align="right">Delete</TableCell>
+                            <TableCell align="right">Update</TableCell>
+                            <TableCell align="right">Check Items</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {this.props.list.length > 0 ? this.props.list.map((user) =>
-                            <StyledTableRow key = {user.firstName}>
-                                <StyledTableCell component ="th" scope = "user">{user.firstName}</StyledTableCell>
-                                <StyledTableCell align="right">{user.lastName}</StyledTableCell>
-                                <StyledTableCell align="right">{user.password}</StyledTableCell>
-                                <StyledTableCell align="right">{this.formatDate(new Date(user.birthday))}</StyledTableCell>
-                                <StyledTableCell align="right">{user.isActive.toString()}</StyledTableCell>
-                                <StyledTableCell align="right"><button onClick={() => this.props.onDelete(user._id)}> Delete </button></StyledTableCell>
-                                <StyledTableCell align="right"><button onClick={() => this.props.onUpdate(user._id)}> Update </button></StyledTableCell>
-                                <StyledTableCell align="right"><button onClick={() => this.props.onCheck(user._id)}> Check Items </button></StyledTableCell>
+                            <TableRow key = {user.firstName}>
+                                <TableCell component ="th" scope = "user">{user.firstName}</TableCell>
+                                <TableCell align="right">{user.lastName}</TableCell>
+                                <TableCell align="right">{user.password}</TableCell>
+                                <TableCell align="right">{this.formatDate(new Date(user.birthday))}</TableCell>
+                                <TableCell align="right">{user.isActive.toString()}</TableCell>
+                                <TableCell align="right"><button onClick={() => this.props.onDelete(user._id)}> Delete </button></TableCell>
+                                <TableCell align="right"><button onClick={() => this.props.onUpdate(user._id)}> Update </button></TableCell>
+                                <TableCell align="right"><button onClick={() => this.props.onCheck(user._id)}> Check Items </button></TableCell>
 
                                 
                                 
-                            </StyledTableRow>
+                            </TableRow>
                         ) : 'No users found'}
                     </TableBody>
                 </Table>

@@ -8,16 +8,20 @@ import UpdateUser from './components/UpdateUser';
 import history from './utils/history';
 import UserContainer from './components/UserContainer';
 import ItemList from './components/ItemList';
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from './utils/theme';
 
 const routing = (
-  <Router history={history}>
-      <Switch>
-        <Route exact path = "/" component={App} />
-        <Route exact path = "/users" component={UserContainer} />
-        <Route exact path = "/users/:id" component={UpdateUser} />
-        <Route exact path = "/users/:id/items/" component={ItemList} />
-      </Switch>
-  </Router>
+  <ThemeProvider theme={theme}>
+    <Router history={history}>
+        <Switch>
+          <Route exact path = "/" component={App} />
+          <Route exact path = "/users" component={UserContainer} />
+          <Route exact path = "/users/:id" component={UpdateUser} />
+          <Route exact path = "/users/:id/items/" component={ItemList} />
+        </Switch>
+    </Router>
+  </ThemeProvider>
 ) 
 
 ReactDOM.render(routing, document.getElementById('root'));

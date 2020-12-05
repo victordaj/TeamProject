@@ -4,6 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from '../utils/axios';
 import history from '../utils/history';
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from '../utils/theme';
 
 class UserContainer extends React.Component {
 
@@ -60,10 +62,12 @@ class UserContainer extends React.Component {
 
   render() {
     return (
-      <div>
-        <CreateUser onCreate={this.createUser} />
-        <UserList list={this.state.userInput} onDelete={this.deleteUser} onUpdate={this.updateUser} onCheck = {this.checkItems} />
-      </div>
+      //<ThemeProvider theme={theme}>
+        <div>
+          <CreateUser onCreate={this.createUser} />
+          <UserList list={this.state.userInput} onDelete={this.deleteUser} onUpdate={this.updateUser} onCheck = {this.checkItems} />
+        </div>
+      //</ThemeProvider>
     )
   }
 }
