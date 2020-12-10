@@ -7,7 +7,14 @@ let error = err => {
   res.status(400);
   res.end("eroare")
 }
-
+//Request to search items by name
+router.get('/:USERS_ID/items/search/:name',function(req,res,next){
+  logic.searchItems(req.params.name).then(items =>{
+    res.json(items)
+  }).catch(err =>{
+    return error(err)
+  })
+});
 //Request to get one item of an user
 router.get('/:USERS_ID/items/:ITEM_ID',function(req,res,next){
   logic.getOneItem(req.params.ITEM_ID).then(items =>{

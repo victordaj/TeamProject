@@ -18,9 +18,11 @@ const routing = (
         <Switch>
           <Route exact path = "/" component={App} />
           <Route exact path = "/users" component={UserContainer} />
-          <Route exact path = "/users/:id" component={UpdateUser} />
-          <Route exact path = "/users/:id/items/" component={ItemContainer} />
-          <Route exact path = "/users/:id/items/:item_id" component={UpdateItem} />
+          <Route exact path = "/users/:id" component={UpdateUser} >
+            <Route exact path = "/users/:id/items/" component={ItemContainer} >
+              <Route exact path = "/users/:id/items/:item_id" component={UpdateItem} />
+            </Route>
+          </Route>
         </Switch>
     </Router>
   </ThemeProvider>

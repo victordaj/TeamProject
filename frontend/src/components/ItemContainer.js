@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from '../utils/axios';
 import history from '../utils/history';
+import SearchItem from './SearchItem';
 
 class ItemContainer extends React.Component {
 
@@ -23,6 +24,14 @@ class ItemContainer extends React.Component {
 
   getItems = id => {
     axios.get('/users/' + id + '/items').then(response => {
+      this.setState({ items: response.data})
+    }).catch(err => {
+      this.error(err)
+    })
+  }
+
+  getSearchedItems = name => {
+    axios.get('/users/' + this.getUID() + '/items/search/' + name ).then(response => {
       this.setState({ items: response.data})
     }).catch(err => {
       this.error(err)
@@ -53,15 +62,20 @@ class ItemContainer extends React.Component {
     history.push('/users/' + this.getUID() + '/items/' + itemId);
   }
 
+  submitSearch = name =>{
+    this.getSearchedItems(name)
+  } 
+
   componentDidMount() {
     this.getItems(this.getUID());
   }
 
   render() {
     return (
-      <div>
-        <CreateItem onCreate={this.createItem} />
+      <div >
+        <CreateItem  onCreate={this.createItem} />
         <ItemList list={this.state.items} onDelete={this.deleteItem} onUpdate={this.updateItem}/>
+        <SearchItem onSubmit={this.submitSearch}/>
       </div>
     )
   }

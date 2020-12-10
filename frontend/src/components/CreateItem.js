@@ -25,6 +25,7 @@ class CreateItem extends React.Component {
 
     render() {
         return  <div>
+                    <h2>Create Items</h2>
                     <p><input name='name' type='text' onChange={this.onChange} value={this.state.name} placeholder='Please enter item name' /></p>
                     <p><input name='description' type='text' onChange={this.onChange} value={this.state.description} placeholder='Please enter item description' /></p>
                     

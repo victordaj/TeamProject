@@ -8,6 +8,13 @@ module.exports = {
   getItems : () =>{
     return Items.find()
   },
+  //search by name on items
+  searchItems : name =>{
+    let regex = new RegExp(name,'i');
+    return Items.find(
+      { $and: [ { $or: [{name : regex },{description: name}] }
+      ]})
+  },
   //get items of an user
   getUserItems : id =>{
     return Items.find({userID : id})
@@ -20,6 +27,7 @@ module.exports = {
       userID : id
     })
   },
+  //update item
   updateItem : (id,body) => {
     return Items.findByIdAndUpdate(id, {
       $set: body
