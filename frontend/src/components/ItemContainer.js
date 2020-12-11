@@ -6,6 +6,11 @@ import axios from '../utils/axios';
 import history from '../utils/history';
 import SearchItem from './SearchItem';
 
+const divStyle = {
+  display: 'flex',
+  justifyContent: 'space-between'
+}
+
 class ItemContainer extends React.Component {
 
   state = {
@@ -72,10 +77,12 @@ class ItemContainer extends React.Component {
 
   render() {
     return (
-      <div >
-        <CreateItem  onCreate={this.createItem} />
+      <div>
+        <div style={divStyle}>
+          <CreateItem  onCreate={this.createItem} />
+          <SearchItem onSubmit={this.submitSearch}/>
+        </div>
         <ItemList list={this.state.items} onDelete={this.deleteItem} onUpdate={this.updateItem}/>
-        <SearchItem onSubmit={this.submitSearch}/>
       </div>
     )
   }

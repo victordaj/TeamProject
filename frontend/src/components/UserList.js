@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import TablePagination from '@material-ui/core/TablePagination';
 
   const useStyles = theme =>({
     table: {
@@ -14,14 +15,27 @@ import Paper from '@material-ui/core/Paper';
     },
   });
 
+class UserList  extends React.Component {
+    state = {
+        rowsPerPage: 5,
+        page: 0
+    }
 
-class UserList  extends React.Component {hur
+    handleChangePage = (event, page) => {
+        this.setState({ page });
+    };
+    
+    handleChangeRowsPerPage = event => {
+        this.setState({ rowsPerPage: event.target.value });
+    };
+
     formatDate = birthday => {
         let formatted_date = birthday.getDate() + '/' + (birthday.getMonth()+1) + '/' + birthday.getFullYear();
         return formatted_date;
     }
 
     render() { 
+        let { page, rowsPerPage } = this.state
         return (<div>
             <h1>
                 Users: 
@@ -41,7 +55,7 @@ class UserList  extends React.Component {hur
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {this.props.list.length > 0 ? this.props.list.map((user) =>
+                    {this.props.list.length > 0 ? this.props.list.slice(page * rowsPerPage, (page * rowsPerPage) + rowsPerPage).map((user) =>
                             <TableRow key = {user.firstName}>
                                 <TableCell component ="th" scope = "user">{user.firstName}</TableCell>
                                 <TableCell align="right">{user.lastName}</TableCell>
@@ -59,6 +73,15 @@ class UserList  extends React.Component {hur
                     </TableBody>
                 </Table>
              </TableContainer>
+             <TablePagination 
+                rowsPerPageOptions = {[5, 10, 25]}
+                component="div"
+                count={this.props.list.length}
+                rowsPerPage={this.state.rowsPerPage}
+                page={this.state.page}
+                onChangePage={this.handleChangePage}
+                onChangeRowsPerPage={this.handleChangeRowsPerPage}
+            />
         </div>); 
     }
 }

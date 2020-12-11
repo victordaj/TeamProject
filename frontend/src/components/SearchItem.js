@@ -14,7 +14,7 @@ class SearchItem  extends React.Component {
     }
     render() { 
         return <div>
-            <h2>SearchItems</h2>
+            <h2>Search Items</h2>
             <p><input name='name' type='text' onChange={this.onChange} value={this.state.name} placeholder='Search item by name or description' /></p>       
             <button onClick={this.submitForm}>Search</button>
         </div>
