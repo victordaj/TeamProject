@@ -9,10 +9,10 @@ module.exports = {
     return Items.find()
   },
   //search by name on items
-  searchItems : name =>{
+  searchItems : (name,id) =>{
     let regex = new RegExp(name,'i');
     return Items.find(
-      { $and: [ { $or: [{name : regex },{description: name}] }
+     {$and :[ { $and: [ { $or: [{name : regex },{description: regex}] },{userID : id}]}
       ]})
   },
   //get items of an user

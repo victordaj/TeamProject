@@ -9,7 +9,7 @@ let error = err => {
 }
 //Request to search items by name
 router.get('/:USERS_ID/items/search/:name',function(req,res,next){
-  logic.searchItems(req.params.name).then(items =>{
+  logic.searchItems(req.params.name,req.params.USERS_ID).then(items =>{
     res.json(items)
   }).catch(err =>{
     return error(err)
