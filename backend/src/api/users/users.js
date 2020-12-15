@@ -32,10 +32,17 @@ router.get('/items',function(req,res,next){
     return error(err)
   })
 });
+router.get('/:USERS_ID/items/',function(req,res,next){
+  logic.getAllUserItems(req.params.USERS_ID).then(items =>{
+    res.json(items);
+  }).catch(err =>{
+    return error(err)
+  })
+});
 
-//Request to get the items of an user
-router.get('/:USERS_ID/items',function(req,res,next){
-  logic.getUserItems(req.params.USERS_ID).then(items =>{
+//Request to get the items of an user for pagination
+router.get('/:USERS_ID/items/:page/:size',function(req,res,next){
+  logic.getUserItems(req.params.USERS_ID,req.params.page,req.params.size).then(items =>{
     res.json(items);
   }).catch(err =>{
     return error(err)

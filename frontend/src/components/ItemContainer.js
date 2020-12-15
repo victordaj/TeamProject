@@ -14,7 +14,11 @@ const divStyle = {
 class ItemContainer extends React.Component {
 
   state = {
-    items: []
+    items: [],
+    allItems : [],
+    page : 0,
+    rowsPerPage : 5,
+    ItemRows : 0
   }
 
   getUID = () => {
@@ -26,9 +30,17 @@ class ItemContainer extends React.Component {
     console.log(err);
     alert("Error");
   }
-
-  getItems = id => {
-    axios.get('/users/' + id + '/items').then(response => {
+  //get all items
+  getAllItems = (id) => {
+    axios.get('/users/' + id + '/items/').then(response => {
+      this.setState({ allItems: response.data})
+    }).catch(err => {
+      this.error(err)
+    })
+  }
+  //get items regarding pagination
+  getItems = (id,page,rowsPerPage) => {
+    axios.get('/users/' + id + '/items/'+ page +'/' + rowsPerPage).then(response => {
       this.setState({ items: response.data})
     }).catch(err => {
       this.error(err)
@@ -46,7 +58,7 @@ class ItemContainer extends React.Component {
   deleteItem = itemId => {
     if(window.confirm("Are you sure?")) {
       axios.delete('/users/' + this.getUID() + '/items/' + itemId).then(() => {
-        this.getItems(this.getUID());
+        this.getItems(this.getUID(),this.state.page,this.state.rowsPerPage);
       }).catch(err => {
         this.error(err);
       })
@@ -56,7 +68,7 @@ class ItemContainer extends React.Component {
   createItem = item => {
     if(item.name && item.description) {
       axios.post('/users/' + this.getUID() + '/items', item).then(() => {
-        this.getItems(this.getUID());
+        this.getItems(this.getUID(),this.state.page,this.state.rowsPerPage);
       }).catch(err => {
         this.error(err);
       })
@@ -69,20 +81,46 @@ class ItemContainer extends React.Component {
 
   submitSearch = name =>{
     this.getSearchedItems(name)
+    this.setState({allItems : this.state.items})
   } 
 
   componentDidMount() {
-    this.getItems(this.getUID());
+    this.getAllItems(this.getUID());
+    this.getItems(this.getUID(),this.state.page,this.state.rowsPerPage);
   }
 
+  handleChangePage = (event,page) => {
+    this.setState({ page : page }, () => {
+      let aux = this.state.page > 0 ? (this.state.rowsPerPage*page) : this.state.ItemRows;
+      console.log(this.state.page)
+      this.getItems(this.getUID(),aux,this.state.rowsPerPage);
+    })
+  };
+
+  handleChangeRowsPerPage = event => {
+    this.setState({ rowsPerPage: event.target.value},() =>{
+      console.log(this.state.rowsPerPage)
+      this.getItems(this.getUID(),this.state.page,this.state.rowsPerPage);
+    })
+  };
+
   render() {
+    console.log(this.state.page);
     return (
       <div>
         <div style={divStyle}>
           <CreateItem  onCreate={this.createItem} />
           <SearchItem onSubmit={this.submitSearch}/>
         </div>
-        <ItemList list={this.state.items} onDelete={this.deleteItem} onUpdate={this.updateItem}/>
+        <ItemList list={this.state.items}
+                  all_List={this.state.allItems}  
+                  page={this.state.page} 
+                  rowsPerPage={this.state.rowsPerPage} 
+                  onDelete={this.deleteItem} 
+                  onUpdate={this.updateItem}
+                  action ={this.handleChangePage}
+                  action1 ={this.handleChangeRowsPerPage}
+        />
       </div>
     )
   }

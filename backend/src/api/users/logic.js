@@ -15,8 +15,14 @@ module.exports = {
      {$and :[ { $and: [ { $or: [{name : regex },{description: regex}] },{userID : id}]}
       ]})
   },
-  //get items of an user
-  getUserItems : id =>{
+  //get items of an user pagination
+  getUserItems : (id,skip,limit) =>{
+    return Items.find({userID : id})
+                .skip(parseInt(skip))
+                .limit(parseInt(limit))
+  },
+  //get all items of an user
+  getAllUserItems : (id,skip,limit) =>{
     return Items.find({userID : id})
   },
   //create item

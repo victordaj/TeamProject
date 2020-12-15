@@ -9,23 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 
 class ItemList extends React.Component {
-
-    state = {
-        rowsPerPage: 5,
-        page: 0
-    }
-
-    handleChangePage = (event, page) => {
-        this.setState({ page });
-    };
-    
-    handleChangeRowsPerPage = event => {
-        this.setState({ rowsPerPage: event.target.value });
-    };
-
     render() {
-        let {page, rowsPerPage} = this.state
-
         return <div>
                 <h1>Items list: </h1>
                 <TableContainer>
@@ -39,7 +23,7 @@ class ItemList extends React.Component {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {this.props.list.length > 0 ? this.props.list.slice(page * rowsPerPage, (page * rowsPerPage) + rowsPerPage).map((item) =>
+                        {this.props.list.length > 0 ? this.props.list.map((item) =>
                             <TableRow key = {item._id}>
                                 <TableCell component ="th" scope = "item">{item.name}</TableCell>
                                 <TableCell>{item.description}</TableCell>
@@ -53,11 +37,11 @@ class ItemList extends React.Component {
              <TablePagination 
                 rowsPerPageOptions = {[5, 10, 25]}
                 component="div"
-                count={this.props.list.length}
-                rowsPerPage={this.state.rowsPerPage}
-                page={this.state.page}
-                onChangePage={this.handleChangePage}
-                onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                count={this.props.all_List.length}
+                rowsPerPage={this.props.rowsPerPage}
+                page={parseInt(this.props.page)}
+                onChangePage={this.props.action}
+                onChangeRowsPerPage={this.props.action1}
             />
         </div>
     }
