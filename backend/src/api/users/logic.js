@@ -10,9 +10,8 @@ module.exports = {
   },
   //search by name on items
   searchItems : (name,id) =>{
-    let regex = new RegExp(name,'i');
     return Items.find(
-     {$and :[ { $and: [ { $or: [{name : regex },{description: regex}] },{userID : id}]}
+     {$and :[ { $and: [ { $or: [{name : name },{description: name}] },{userID : id}]}
       ]})
   },
   //get items of an user
@@ -48,6 +47,10 @@ module.exports = {
   //get user by id
   getUser : id => {
     return Users.findById(id)
+  },
+  //get user by credentials
+  getUserByCredentials: (firstName) => {
+    return Users.findOne({ firstName: firstName, isActive: true })
   },
   //delete user by id
   deleteUser : id => {

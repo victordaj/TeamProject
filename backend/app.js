@@ -6,6 +6,7 @@ var logger = require('morgan');
 let cors = require('cors');
 
 var usersRouter = require('./src/api/users/users');
+var loginRouter = require('./src/api/users/login');
 
 var app = express();
 
@@ -20,6 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/users', usersRouter);
+app.use('/login', loginRouter);
 
 
 // catch 404 and forward to error handler

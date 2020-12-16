@@ -11,11 +11,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-.inline div { 
-  display: inline-block; 
-  width: 500px; 
-  min-height: 50px; 
-  background-color: #eee; 
-  height: auto; 
-} 
