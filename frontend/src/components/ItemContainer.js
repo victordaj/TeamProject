@@ -15,7 +15,7 @@ class ItemContainer extends React.Component {
 
   state = {
     items: [],
-    allItems : [],
+    count : 0,
     page : 0,
     rowsPerPage : 5,
     ItemRows : 0
@@ -40,8 +40,8 @@ class ItemContainer extends React.Component {
   }
   //get items regarding pagination
   getItems = (id,page,rowsPerPage) => {
-    axios.get('/users/' + id + '/items/'+ page +'/' + rowsPerPage).then(response => {
-      this.setState({ items: response.data})
+    axios.get('/users/' + id + '/items/?page='+ page +'&rows=' + rowsPerPage).then(response => {
+      this.setState({ items: response.data.items,count : response.data.count})
     }).catch(err => {
       this.error(err)
     })
@@ -81,11 +81,10 @@ class ItemContainer extends React.Component {
 
   submitSearch = name =>{
     this.getSearchedItems(name)
-    this.setState({allItems : this.state.items})
+    this.setState({count : this.state.items.length})
   } 
 
   componentDidMount() {
-    this.getAllItems(this.getUID());
     this.getItems(this.getUID(),this.state.page,this.state.rowsPerPage);
   }
 
@@ -113,7 +112,7 @@ class ItemContainer extends React.Component {
           <SearchItem onSubmit={this.submitSearch}/>
         </div>
         <ItemList list={this.state.items}
-                  all_List={this.state.allItems}  
+                  count={this.state.count}  
                   page={this.state.page} 
                   rowsPerPage={this.state.rowsPerPage} 
                   onDelete={this.deleteItem} 

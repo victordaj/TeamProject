@@ -37,7 +37,7 @@ class ItemList extends React.Component {
              <TablePagination 
                 rowsPerPageOptions = {[5, 10, 25]}
                 component="div"
-                count={this.props.all_List.length}
+                count={this.props.count}
                 rowsPerPage={this.props.rowsPerPage}
                 page={parseInt(this.props.page)}
                 onChangePage={this.props.action}
