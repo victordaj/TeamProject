@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom';
 import axios from '../utils/axios';
 import history from '../utils/history';
 import SearchItem from './SearchItem';
+import UserContainer from './UserContainer';
+import UserInfo from './UserInfo';
 
 const divStyle = {
   display: 'flex',
@@ -15,6 +17,7 @@ class ItemContainer extends React.Component {
 
   state = {
     items: [],
+    user : [],
     count : 0,
     page : 0,
     rowsPerPage : 5,
@@ -29,6 +32,14 @@ class ItemContainer extends React.Component {
   error = err => {
     console.log(err);
     alert("Error");
+  }
+  //getUser
+  getUser = id => {
+    axios.get('/users/' + id).then(response => {
+      this.setState({user: response.data})
+    }).catch(err => {
+      this.error(err)
+    })
   }
   //get all items
   getAllItems = (id) => {
@@ -86,29 +97,29 @@ class ItemContainer extends React.Component {
 
   componentDidMount() {
     this.getItems(this.getUID(),this.state.page,this.state.rowsPerPage);
+    this.getUser(this.getUID());
   }
 
   handleChangePage = (event,page) => {
     this.setState({ page : page }, () => {
       let aux = this.state.page > 0 ? (this.state.rowsPerPage*page) : this.state.ItemRows;
-      console.log(this.state.page)
       this.getItems(this.getUID(),aux,this.state.rowsPerPage);
     })
   };
 
   handleChangeRowsPerPage = event => {
     this.setState({ rowsPerPage: event.target.value},() =>{
-      console.log(this.state.rowsPerPage)
       this.getItems(this.getUID(),this.state.page,this.state.rowsPerPage);
     })
   };
 
   render() {
-    console.log(this.state.page);
+    console.log(this.state.user);
     return (
       <div>
         <div style={divStyle}>
           <CreateItem  onCreate={this.createItem} />
+          <UserInfo user={this.state.user}></UserInfo>
           <SearchItem onSubmit={this.submitSearch}/>
         </div>
         <ItemList list={this.state.items}
