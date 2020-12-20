@@ -17,7 +17,7 @@ class UserContainer extends React.Component {
   }
 
   getUsers = () => {
-    axios.get('/users/').then(response => {
+    axios.get('/users').then(response => {
       this.setState({userInput: response.data})
     }).catch(err => {
       this.error(err)

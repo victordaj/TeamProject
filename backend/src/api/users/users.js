@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const logic = require('./logic');
+let log = require('../../../app')
 
 let error = err => {
   console.log('err', err)

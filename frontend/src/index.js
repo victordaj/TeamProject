@@ -1,32 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {Router, Switch, Route } from 'react-router-dom';
+import { Router, Switch, Route } from 'react-router-dom';
 import UpdateUser from './components/UpdateUser';
 import history from './utils/history';
 import UserContainer from './components/UserContainer';
 import ItemContainer from './components/ItemContainer';
 import UpdateItem from './components/UpdateItem';
+import Login from './components/Login';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from './utils/theme';
+import axios from './utils/axios';
 
-const routing = (
-  <ThemeProvider theme={theme}>
-    <Router history={history}>
-        <Switch>
-          <Route exact path = "/" component={App} />
-          <Route exact path = "/users" component={UserContainer} />
-          <Route exact path = "/users/:id" component={UpdateUser} />
-          <Route exact path = "/users/:id/items/" component={ItemContainer} />
-          <Route exact path = "/users/:id/items/:item_id" component={UpdateItem} />
-        </Switch>
-    </Router>
-  </ThemeProvider>
-) 
 
-ReactDOM.render(routing, document.getElementById('root'));
+const Routing = () => {
+  let [render, setRender] = useState(false)
+  let [isLogged, setIsLogged] = useState(false)
+
+  useEffect(() => {
+    axios.get('/isLogged').then(() => {
+      setRender(true)
+      setIsLogged(true)
+    }).catch(() => {
+      setRender(true)
+      setIsLogged(false)
+    })
+  }, [])
+
+  return render ? (
+    <ThemeProvider theme={theme}>
+      <Router history={history}>
+        {isLogged ?
+          <Switch>
+            <Route exact path="/" component={App} />
+            <Route exact path="/users" component={UserContainer} />
+            <Route exact path="/users/:id" component={UpdateUser} />
+            <Route exact path="/users/:id/items/" component={ItemContainer} />
+            <Route exact path="/users/:id/items/:item_id" component={UpdateItem} />
+          </Switch> :
+          <Login />}
+      </Router>
+    </ThemeProvider>
+  ) : null
+}
+
+ReactDOM.render(<Routing />, document.getElementById('root'));
 
 
 // If you want to start measuring performance in your app, pass a function

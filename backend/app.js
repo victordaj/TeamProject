@@ -4,8 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 let cors = require('cors');
+const session = require('express-session');
 
 var usersRouter = require('./src/api/users/users');
+var loginRouter = require('./src/api/users/login');
 
 var app = express();
 
@@ -13,13 +15,37 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(cors());
+app.use(cors({ origin: "http://localhost:3000", credentials: true, optionsSuccessStatus: 200 }));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use(session ({
+  secret: 'maresecret',
+}))
+
+isLogged = (req, res, next) => {
+  console.log("App.js: ", req.session.key)
+  //console.log("ID app.js: ", req.session.id)
+  if(req.session.name){
+     next();
+  } else {
+     var err = new Error("Not logged in!");
+     console.log(req.session.name);
+     res.status(400).end()
+  }
+}
+
+app.get('/logout', (req, res) => { console.log(req.session.name), req.session.destroy(), res.end("destroyed")})
+app.use('/login', loginRouter);
+app.use(isLogged);
+app.use('/isLogged', (req, res) => { 
+  if(isLogged)
+    return res.status(200).end()
+})
 app.use('/users', usersRouter);
+
 
 
 // catch 404 and forward to error handler
