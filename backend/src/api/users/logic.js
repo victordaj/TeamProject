@@ -49,8 +49,8 @@ module.exports = {
     return Users.findById(id)
   },
   //get user by credentials
-  getUserByCredentials: (firstName) => {
-    return Users.findOne({ firstName: firstName, isActive: true })
+  getUserByCredentials: (firstName, password) => {
+    return Users.findOne({ firstName: firstName, password: password, isActive: true })
   },
   //delete user by id
   deleteUser : id => {

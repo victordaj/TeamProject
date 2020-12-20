@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from '../utils/axios'
 import history from '../utils/history';
+import UserContainer from './UserContainer';
 
 class Login extends React.Component {
     state = {
@@ -18,11 +19,13 @@ class Login extends React.Component {
 
     submitForm = () => {
         if(this.state.firstName && this.state.password){
-            axios.post('/login', { firstName: this.state.firstName }).then(user => {
+            axios.post('/login', { firstName: this.state.firstName, password: this.state.password }).then(user => {
+                console.log(user)
                 if(user.data.password === this.state.password) {
-                    history.push('/users')
+                    alert("Succesfull login!");
+                    window.location.href = '/users'
                 } else {
-                    alert("Invalid credentials!")
+                    alert("Invalid credentials!");
                 }
             }).catch(err => {
                 console.log(err);

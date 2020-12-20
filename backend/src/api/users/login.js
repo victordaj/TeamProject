@@ -10,12 +10,12 @@ let error = err => {
 
 //Request to get user credentials
 router.post('/', function(req, res, next){
-    logic.getUserByCredentials(req.body.firstName).then(user => {
+    logic.getUserByCredentials(req.body.firstName, req.body.password).then(user => {
         if(!user) {
-            res.end("Couldn't find user")
-        } else if (req.body.password !== user.password) {
-            res.end("Passwords did not match")
+            res.end("Couldn't find user!")
         } else {
+            req.session.name = req.body.firstName
+            req.session.key = user._id
             res.json(user)
         }
     }).catch(err => {
