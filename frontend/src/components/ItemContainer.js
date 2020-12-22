@@ -33,26 +33,12 @@ class ItemContainer extends React.Component {
     console.log(err);
     alert("Error");
   }
-  //getUser
-  getUser = id => {
-    axios.get('/users/' + id).then(response => {
-      this.setState({user: response.data})
-    }).catch(err => {
-      this.error(err)
-    })
-  }
-  //get all items
-  getAllItems = (id) => {
-    axios.get('/users/' + id + '/items/').then(response => {
-      this.setState({ allItems: response.data})
-    }).catch(err => {
-      this.error(err)
-    })
-  }
+
   //get items regarding pagination
   getItems = (id,page,rowsPerPage) => {
     axios.get('/users/' + id + '/items/?page='+ page +'&rows=' + rowsPerPage).then(response => {
-      this.setState({ items: response.data.items,count : response.data.count})
+      console.log(response);
+      this.setState({ items: response.data.items,count : response.data.count,user : response.data.user})
     }).catch(err => {
       this.error(err)
     })
@@ -97,7 +83,7 @@ class ItemContainer extends React.Component {
 
   componentDidMount() {
     this.getItems(this.getUID(),this.state.page,this.state.rowsPerPage);
-    this.getUser(this.getUID());
+    //this.getUser(this.getUID());
   }
 
   handleChangePage = (event,page) => {
