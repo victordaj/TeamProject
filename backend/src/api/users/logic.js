@@ -21,8 +21,15 @@ module.exports = {
   },
   //update user by id
   updateUser : (id,body) => {
+    let hashedPass = bcrypt.hashSync(body.password, saltRounds)
     return Users.findByIdAndUpdate(id, {
-      $set: body
+      $set: 
+      { 
+        firstName: body.firstName,
+        lastName: body.lastName,
+        birthday: body.birthday,
+        password: hashedPass
+      }
     })
   },
 

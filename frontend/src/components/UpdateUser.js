@@ -42,7 +42,7 @@ class UpdateUser extends React.Component {
 
     submitForm = () => {
         if(this.state.firstName && this.state.lastName && this.state.password && this.state.birthday) {
-            axios.put('/users' + this.props.match.params.id, 
+            axios.put('/users/' + this.props.match.params.id, 
             { firstName: this.state.firstName, 
             lastName: this.state.lastName,
             password: this.state.password,
