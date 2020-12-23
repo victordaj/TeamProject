@@ -20,9 +20,9 @@ class Login extends React.Component {
     submitForm = () => {
         if(this.state.firstName && this.state.password){
             axios.post('/login', { firstName: this.state.firstName, password: this.state.password }).then(user => {
-                console.log(user)
-                if(user.data.password === this.state.password) {
-                    alert("Succesfull login!");
+                console.log("Here it is:", user)
+                if(user.data.password) {
+                    alert("Succesful login!");
                     window.location.href = '/users'
                 } else {
                     alert("Invalid credentials!");

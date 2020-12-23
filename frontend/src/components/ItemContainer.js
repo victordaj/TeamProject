@@ -33,19 +33,42 @@ class ItemContainer extends React.Component {
     console.log(err);
     alert("Error");
   }
+<<<<<<< HEAD
 
   //get items regarding pagination
   getItems = (id,page,rowsPerPage) => {
     axios.get('/users/' + id + '/items/?page='+ page +'&rows=' + rowsPerPage).then(response => {
       console.log(response);
       this.setState({ items: response.data[1],count : response.data[0].length,user : response.data[2]})
+=======
+  //getUser
+  getUser = id => {
+    axios.get('/users/' + id).then(response => {
+      this.setState({user: response.data})
+    }).catch(err => {
+      this.error(err)
+    })
+  }
+  //get all items
+  getAllItems = (id) => {
+    axios.get('/items/' + id + '/items/').then(response => {
+      this.setState({ allItems: response.data})
+    }).catch(err => {
+      this.error(err)
+    })
+  }
+  //get items regarding pagination
+  getItems = (id,page,rowsPerPage) => {
+    axios.get('/items/' + id + '/items/?page='+ page +'&rows=' + rowsPerPage).then(response => {
+      this.setState({ items: response.data.items,count : response.data.count})
+>>>>>>> 83ccbbb46de172b23145a19d6b0139b4c91ea422
     }).catch(err => {
       this.error(err)
     })
   }
 
   getSearchedItems = name => {
-    axios.get('/users/' + this.getUID() + '/items/search/' + name ).then(response => {
+    axios.get('/items/' + this.getUID() + '/items/search/' + name ).then(response => {
       this.setState({ items: response.data})
     }).catch(err => {
       this.error(err)
@@ -54,7 +77,7 @@ class ItemContainer extends React.Component {
 
   deleteItem = itemId => {
     if(window.confirm("Are you sure?")) {
-      axios.delete('/users/' + this.getUID() + '/items/' + itemId).then(() => {
+      axios.delete('/items/' + this.getUID() + '/items/' + itemId).then(() => {
         this.getItems(this.getUID(),this.state.page,this.state.rowsPerPage);
       }).catch(err => {
         this.error(err);
@@ -64,7 +87,7 @@ class ItemContainer extends React.Component {
 
   createItem = item => {
     if(item.name && item.description) {
-      axios.post('/users/' + this.getUID() + '/items', item).then(() => {
+      axios.post('/items/' + this.getUID() + '/items', item).then(() => {
         this.getItems(this.getUID(),this.state.page,this.state.rowsPerPage);
       }).catch(err => {
         this.error(err);
@@ -73,7 +96,7 @@ class ItemContainer extends React.Component {
   }
 
   updateItem = itemId => {
-    history.push('/users/' + this.getUID() + '/items/' + itemId);
+    history.push('/items/' + this.getUID() + '/items/' + itemId);
   }
 
   submitSearch = name =>{

@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//const bcrypt = require('bcrypt');
-//const saltRounds = 10;
 
 
 class CreateUser extends React.Component {
@@ -19,7 +17,6 @@ class CreateUser extends React.Component {
     }
 
     submitForm = () => {
-       // let hash = bcrypt.hashSync(this.state.password, saltRounds);
         this.props.onCreate({
             firstName : this.state.firstName,
             lastName : this.state.lastName,

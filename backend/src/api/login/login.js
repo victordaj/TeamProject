@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const logic = require('./logic');
+const bcrypt = require('bcrypt');
 
 let error = err => {
   console.log('err', err)
@@ -10,8 +11,8 @@ let error = err => {
 
 //Request to get user credentials
 router.post('/', function(req, res, next){
-    logic.getUserByCredentials(req.body.firstName, req.body.password).then(user => {
-        if(!user) {
+    logic.getUserByCredentials(req.body.firstName).then(user => {
+        if(!bcrypt.compareSync(req.body.password, user.password)) {
             res.end("Couldn't find user!")
         } else {
             req.session.name = req.body.firstName

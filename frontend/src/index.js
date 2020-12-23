@@ -38,9 +38,14 @@ const Routing = () => {
             <Route exact path="/" component={App} />
             <Route exact path="/users" component={UserContainer} />
             <Route exact path="/users/:id" component={UpdateUser} />
+<<<<<<< HEAD
             <Route exact path="/users/:id/items/" component={ItemContainer} />
             <Route exact path="/users/:id/items/:item_id" component={UpdateItem} />
             <Route exact path="/resetPassword" component={ResetPassword}/>           
+=======
+            <Route exact path="/items/:id/items/" component={ItemContainer} />
+            <Route exact path="/items/:id/items/:item_id" component={UpdateItem} />
+>>>>>>> 83ccbbb46de172b23145a19d6b0139b4c91ea422
           </Switch> :
           <Login />}
       </Router>
