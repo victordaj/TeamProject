@@ -26,12 +26,12 @@ class ResetPassword extends React.Component {
         this.getUsers();
     }
     submitForm = () => {
-        console.log(this.state)
+        console.log("State: ", this.state)
         if(this.state.firstName && this.state.oldPassword && this.state.newPassword && this.state.newPasswordRepeat){
             this.state.users.forEach(element => {
                 if(element.firstName === this.state.firstName){
-                    console.log(element.password)
-                    console.log(this.state.oldPassword)
+                    console.log("Password: ", element.password)
+                    console.log("Old password: ", this.state.oldPassword)
                         if(this.state.newPassword === this.state.newPasswordRepeat){
                             axios.put('/users/reset/' + element._id,{password : this.state.newPassword}).then(()=>{
                                 alert("Password succesfully reseted")
@@ -46,7 +46,7 @@ class ResetPassword extends React.Component {
     }
     render() { 
         return (<div>
-                    <p><input name='firstName' type='text' value = {this.state.firstName} onChange={this.onChange} placeholder="FirstName" /></p>
+                    <p><input name='firstName' type='text' value = {this.state.firstName} onChange={this.onChange} placeholder="First Name" /></p>
                     <p><input name='oldPassword' type='text' value = {this.state.lastName} onChange={this.onChange} placeholder="Old Password" /></p>
                     <p><input name='newPassword' type='text' value = {this.state.password} onChange={this.onChange} placeholder="New Password"  /></p>
                     <p><input name='newPasswordRepeat' type='text' value = {this.state.newPasswordRepeat} onChange={this.onChange} placeholder="New Password Repeat" /></p>
