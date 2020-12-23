@@ -38,7 +38,7 @@ class ItemContainer extends React.Component {
   getItems = (id,page,rowsPerPage) => {
     axios.get('/users/' + id + '/items/?page='+ page +'&rows=' + rowsPerPage).then(response => {
       console.log(response);
-      this.setState({ items: response.data.items,count : response.data.count,user : response.data.user})
+      this.setState({ items: response.data[1],count : response.data[0].length,user : response.data[2]})
     }).catch(err => {
       this.error(err)
     })
@@ -83,7 +83,6 @@ class ItemContainer extends React.Component {
 
   componentDidMount() {
     this.getItems(this.getUID(),this.state.page,this.state.rowsPerPage);
-    //this.getUser(this.getUID());
   }
 
   handleChangePage = (event,page) => {
@@ -100,7 +99,6 @@ class ItemContainer extends React.Component {
   };
 
   render() {
-    console.log(this.state.user);
     return (
       <div>
         <div style={divStyle}>

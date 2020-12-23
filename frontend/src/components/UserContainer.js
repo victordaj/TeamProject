@@ -26,7 +26,7 @@ class UserContainer extends React.Component {
 
   deleteUser = userId => {
     if(window.confirm("Are you sure?")) {
-      axios.put('/users/' + userId, { isActive: false}).then(() => {
+      axios.delete('/users/' + userId, { isActive: false}).then(() => {
         this.getUsers();
       }).catch(err => {
         this.error(err);

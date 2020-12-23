@@ -14,15 +14,9 @@ module.exports = {
      {$and :[ { $and: [ { $or: [{name : name },{description: name}] },{userID : id}]}
       ]})
   },
-  //get items of an user pagination
-  getUserItems : (id,skip,limit) =>{
-    return Items.find({userID : id})
-                .skip(parseInt(skip))
-                .limit(parseInt(limit))
-  },
   //get all items of an user
-  getAllUserItems : (id,skip,limit) =>{
-    return Items.find({userID : id})
+  getAllUserItemsPagination : (id,skip,limit) =>{
+    return Promise.all([Items.find({userID : id}),Items.find({userID : id}).skip(parseInt(skip)).limit(parseInt(limit)),Users.findById(id)])
   },
   //create item
   createItem : (body,id) =>{

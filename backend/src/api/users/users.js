@@ -37,15 +37,11 @@ router.get('/items',function(req,res,next){
 
 //Request to get the items of an user for pagination
 router.get('/:USERS_ID/items/',function(req,res,next){
-  logic.getAllUserItems(req.params.USERS_ID).then(allitems =>{
-    logic.getUserItems(req.params.USERS_ID,req.query.page,req.query.rows).then(items =>{
-      logic.getUser(req.params.USERS_ID).then(user =>{
-        res.json({items : items,count : allitems.length,user : user})
-      })
+  logic.getAllUserItemsPagination(req.params.USERS_ID,req.query.page,req.query.rows).then(result =>{
+        res.json(result)
     }).catch(err =>{
       return error(err)
     })
-  })
 });
 //Request to delete an item of an user
 router.delete('/:USERS_ID/items/:ITEM_ID', function(req, res, next){
@@ -106,6 +102,7 @@ router.put('/users/:USERS_ID', function(req, res, next){
     return error(err)
   })
 });
+
 //Request to delete an user
 router.delete('/:USERS_ID', function(req, res, next){
   logic.deleteUser(req.params.USERS_ID).then(() => {
