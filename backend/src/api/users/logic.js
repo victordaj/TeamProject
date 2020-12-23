@@ -1,11 +1,11 @@
 require('../../utils/database/connection');
 let Users = require('../../utils/database/models/users');
+let Items = require('../../utils/database/models/items');
 const { findByIdAndDelete } = require('../../utils/database/models/users');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 module.exports = {
-<<<<<<< HEAD
   //get all items
   getItems : () =>{
     return Items.find()
@@ -42,8 +42,6 @@ module.exports = {
   getOneItem : item_id =>{
     return Items.findById(item_id)
   },
-=======
->>>>>>> 83ccbbb46de172b23145a19d6b0139b4c91ea422
   //get all users
   getUsers : () =>{
     return Users.find({ isActive: true })
@@ -63,6 +61,10 @@ module.exports = {
     return Users.findByIdAndUpdate(id, {
       $set: body
     })
+  },
+  resetUserPassword :(id,body) =>{
+    let hashedPass = bcrypt.hashSync(body.password, saltRounds)
+    return Users.findByIdAndUpdate(id,{password : hashedPass })
   },
 
   //create user

@@ -19,6 +19,7 @@ class Login extends React.Component {
 
     submitForm = () => {
         if(this.state.firstName && this.state.password){
+            console.log(this.state)
             axios.post('/login', { firstName: this.state.firstName, password: this.state.password }).then(user => {
                 console.log("Here it is:", user)
                 if(user.data.password) {

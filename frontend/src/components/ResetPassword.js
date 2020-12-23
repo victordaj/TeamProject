@@ -32,16 +32,14 @@ class ResetPassword extends React.Component {
                 if(element.firstName === this.state.firstName){
                     console.log(element.password)
                     console.log(this.state.oldPassword)
-                    if(element.password === this.state.oldPassword){
                         if(this.state.newPassword === this.state.newPasswordRepeat){
-                            axios.put('/users/users/' + element._id,{password : this.state.newPassword}).then(()=>{
+                            axios.put('/users/reset/' + element._id,{password : this.state.newPassword}).then(()=>{
                                 alert("Password succesfully reseted")
                                 history.push('/login')
                             }).catch(err => {
                                 console.log(err);
                             })
                         }else{alert("Check new password")}
-                    }else{alert("Wrong password")}
                 }else{ alert("The user does not exist"); }
             })
         }else{alert("Please complete all the fields") }

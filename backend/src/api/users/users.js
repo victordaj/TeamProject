@@ -99,7 +99,14 @@ router.put('/:USERS_ID', function(req, res, next){
     return error(err)
   })
 });
-
+//Request to reset password
+router.put('/reset/:USERS_ID', function(req, res, next){
+  logic.resetUserPassword(req.params.USERS_ID,req.body).then(() => {
+    res.end("Password succsefully reseted")
+  }).catch(err => {
+    return error(err)
+  })
+});
 //Request to delete an user
 router.delete('/:USERS_ID', function(req, res, next){
   logic.deleteUser(req.params.USERS_ID).then(() => {

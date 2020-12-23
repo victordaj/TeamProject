@@ -4,6 +4,6 @@ let Users = require('../../utils/database/models/users');
 module.exports = {
     //get user by credentials
     getUserByCredentials: (firstName) => {
-        return Users.findOne({ firstName: firstName, isActive: true })
+        return Users.findOne({ firstName: firstName, isActive: true })           
     },
 }

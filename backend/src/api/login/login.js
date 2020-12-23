@@ -13,6 +13,7 @@ let error = err => {
 router.post('/', function(req, res, next){
     logic.getUserByCredentials(req.body.firstName).then(user => {
         if(!bcrypt.compareSync(req.body.password, user.password)) {
+            console.log(user)
             res.end("Couldn't find user!")
         } else {
             req.session.name = req.body.firstName
