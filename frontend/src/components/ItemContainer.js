@@ -43,7 +43,7 @@ class ItemContainer extends React.Component {
   }
   //get all items
   getAllItems = (id) => {
-    axios.get('/users/' + id + '/items/').then(response => {
+    axios.get('/items/' + id + '/items/').then(response => {
       this.setState({ allItems: response.data})
     }).catch(err => {
       this.error(err)
@@ -51,7 +51,7 @@ class ItemContainer extends React.Component {
   }
   //get items regarding pagination
   getItems = (id,page,rowsPerPage) => {
-    axios.get('/users/' + id + '/items/?page='+ page +'&rows=' + rowsPerPage).then(response => {
+    axios.get('/items/' + id + '/items/?page='+ page +'&rows=' + rowsPerPage).then(response => {
       this.setState({ items: response.data.items,count : response.data.count})
     }).catch(err => {
       this.error(err)
@@ -59,7 +59,7 @@ class ItemContainer extends React.Component {
   }
 
   getSearchedItems = name => {
-    axios.get('/users/' + this.getUID() + '/items/search/' + name ).then(response => {
+    axios.get('/items/' + this.getUID() + '/items/search/' + name ).then(response => {
       this.setState({ items: response.data})
     }).catch(err => {
       this.error(err)
@@ -68,7 +68,7 @@ class ItemContainer extends React.Component {
 
   deleteItem = itemId => {
     if(window.confirm("Are you sure?")) {
-      axios.delete('/users/' + this.getUID() + '/items/' + itemId).then(() => {
+      axios.delete('/items/' + this.getUID() + '/items/' + itemId).then(() => {
         this.getItems(this.getUID(),this.state.page,this.state.rowsPerPage);
       }).catch(err => {
         this.error(err);
@@ -78,7 +78,7 @@ class ItemContainer extends React.Component {
 
   createItem = item => {
     if(item.name && item.description) {
-      axios.post('/users/' + this.getUID() + '/items', item).then(() => {
+      axios.post('/items/' + this.getUID() + '/items', item).then(() => {
         this.getItems(this.getUID(),this.state.page,this.state.rowsPerPage);
       }).catch(err => {
         this.error(err);
@@ -87,7 +87,7 @@ class ItemContainer extends React.Component {
   }
 
   updateItem = itemId => {
-    history.push('/users/' + this.getUID() + '/items/' + itemId);
+    history.push('/items/' + this.getUID() + '/items/' + itemId);
   }
 
   submitSearch = name =>{

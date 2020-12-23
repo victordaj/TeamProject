@@ -7,7 +7,8 @@ let cors = require('cors');
 const session = require('express-session');
 
 var usersRouter = require('./src/api/users/users');
-var loginRouter = require('./src/api/users/login');
+var loginRouter = require('./src/api/login/login');
+var itemsRouter = require('./src/api/items/items');
 
 var app = express();
 
@@ -45,6 +46,7 @@ app.use('/isLogged', (req, res) => {
     return res.status(200).end()
 })
 app.use('/users', usersRouter);
+app.use('/items', itemsRouter);
 
 
 

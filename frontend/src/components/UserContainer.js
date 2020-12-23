@@ -17,7 +17,7 @@ class UserContainer extends React.Component {
   }
 
   getUsers = () => {
-    axios.get('/users').then(response => {
+    axios.get('/users/').then(response => {
       this.setState({userInput: response.data})
     }).catch(err => {
       this.error(err)
@@ -26,7 +26,7 @@ class UserContainer extends React.Component {
 
   deleteUser = userId => {
     if(window.confirm("Are you sure?")) {
-      axios.put('/users/' + userId, { isActive: false}).then(() => {
+      axios.delete('/users/' + userId, { isActive: false}).then(() => {
         this.getUsers();
       }).catch(err => {
         this.error(err);
@@ -49,7 +49,7 @@ class UserContainer extends React.Component {
   }
 
   checkItems = userId => {
-    history.push('/users/' + userId + '/items/');
+    history.push('/items/' + userId + '/items/');
   }
 
   componentDidMount() {

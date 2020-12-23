@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const logic = require('./logic');
-let log = require('../../../app')
 
 let error = err => {
   console.log('err', err)
@@ -33,8 +32,6 @@ router.get('/items',function(req,res,next){
     return error(err)
   })
 });
-
-
 
 //Request to get the items of an user for pagination
 router.get('/:USERS_ID/items/',function(req,res,next){
@@ -98,7 +95,7 @@ router.put('/:USERS_ID/items/:ITEM_ID', function(req, res, next) {
 })
 
 //Request to update an user
-router.put('/users/:USERS_ID', function(req, res, next){
+router.put('/:USERS_ID', function(req, res, next){
   logic.updateUser(req.params.USERS_ID,req.body).then(() => {
     res.end("User succesfully updated")
   }).catch(err => {

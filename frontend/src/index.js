@@ -37,8 +37,8 @@ const Routing = () => {
             <Route exact path="/" component={App} />
             <Route exact path="/users" component={UserContainer} />
             <Route exact path="/users/:id" component={UpdateUser} />
-            <Route exact path="/users/:id/items/" component={ItemContainer} />
-            <Route exact path="/users/:id/items/:item_id" component={UpdateItem} />
+            <Route exact path="/items/:id/items/" component={ItemContainer} />
+            <Route exact path="/items/:id/items/:item_id" component={UpdateItem} />
           </Switch> :
           <Login />}
       </Router>
