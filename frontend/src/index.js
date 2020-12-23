@@ -36,7 +36,6 @@ const Routing = () => {
         {isLogged ?
           <Switch>
             <Route exact path="/" component={App} />
-            
             <Route exact path="/users" component={UserContainer} />
             <Route exact path="/users/:id" component={UpdateUser} />
             <Route exact path="/users/:id/items/" component={ItemContainer} />
