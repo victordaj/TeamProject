@@ -49,7 +49,7 @@ class UserContainer extends React.Component {
   }
 
   checkItems = userId => {
-    history.push('/items/' + userId + '/items/');
+    history.push('/users/' + userId + '/items/');
   }
 
   componentDidMount() {

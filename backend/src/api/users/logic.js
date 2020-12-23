@@ -1,10 +1,47 @@
 require('../../utils/database/connection');
 let Users = require('../../utils/database/models/users');
+let Items = require('../../utils/database/models/items');
 const { findByIdAndDelete } = require('../../utils/database/models/users');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 module.exports = {
+  //get all items
+  getItems : () =>{
+    return Items.find()
+  },
+  //search by name on items
+  searchItems : (name,id) =>{
+    return Items.find(
+     {$and :[ { $and: [ { $or: [{name : name },{description: name}] },{userID : id}]}
+      ]})
+  },
+  //get all items of an user
+  getAllUserItemsPagination : (id,skip,limit) =>{
+    return Promise.all([Items.find({userID : id}),Items.find({userID : id}).skip(parseInt(skip)).limit(parseInt(limit)),Users.findById(id)])
+  },
+  //create item
+  createItem : (body,id) =>{
+    return Items.create({
+      name : body.name,
+      description : body.description,
+      userID : id
+    })
+  },
+  //update item
+  updateItem : (id,body) => {
+    return Items.findByIdAndUpdate(id, {
+      $set: body
+    })
+  },
+  //delte item
+  deleteItem : id =>{
+    return Items.findByIdAndDelete(id)
+  },
+  //get one item of an user
+  getOneItem : item_id =>{
+    return Items.findById(item_id)
+  },
   //get all users
   getUsers : () =>{
     return Users.find({ isActive: true })
@@ -31,6 +68,10 @@ module.exports = {
         password: hashedPass
       }
     })
+  },
+  resetUserPassword :(id,body) =>{
+    let hashedPass = bcrypt.hashSync(body.password, saltRounds)
+    return Users.findByIdAndUpdate(id,{password : hashedPass })
   },
 
   //create user

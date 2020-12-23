@@ -27,7 +27,6 @@ router.get('/:USERS_ID/items/:ITEM_ID',function(req,res,next){
 //Request for geting all the items
 router.get('/items',function(req,res,next){
   logic.getItems().then(items =>{
-    res.json(items);
   }).catch(err =>{
     return error(err)
   })
@@ -35,13 +34,11 @@ router.get('/items',function(req,res,next){
 
 //Request to get the items of an user for pagination
 router.get('/:USERS_ID/items/',function(req,res,next){
-  logic.getAllUserItems(req.params.USERS_ID).then(allitems =>{
-    logic.getUserItems(req.params.USERS_ID,req.query.page,req.query.rows).then(items =>{
-      res.json({items : items,count : allitems.length})
+  logic.getAllUserItemsPagination(req.params.USERS_ID,req.query.page,req.query.rows).then(result =>{
+        res.json(result)
     }).catch(err =>{
       return error(err)
     })
-  })
 });
 //Request to delete an item of an user
 router.delete('/:USERS_ID/items/:ITEM_ID', function(req, res, next){
@@ -98,6 +95,14 @@ router.put('/:USERS_ID/items/:ITEM_ID', function(req, res, next) {
 router.put('/:USERS_ID', function(req, res, next){
   logic.updateUser(req.params.USERS_ID,req.body).then(() => {
     res.end("User succesfully updated")
+  }).catch(err => {
+    return error(err)
+  })
+});
+//Request to reset password
+router.put('/reset/:USERS_ID', function(req, res, next){
+  logic.resetUserPassword(req.params.USERS_ID,req.body).then(() => {
+    res.end("Password succsefully reseted")
   }).catch(err => {
     return error(err)
   })

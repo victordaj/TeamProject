@@ -19,6 +19,7 @@ class Login extends React.Component {
 
     submitForm = () => {
         if(this.state.firstName && this.state.password){
+            console.log(this.state)
             axios.post('/login', { firstName: this.state.firstName, password: this.state.password }).then(user => {
                 console.log("Here it is:", user)
                 if(user.data.password) {
@@ -35,13 +36,15 @@ class Login extends React.Component {
             alert("Please complete all fields!")
         }
     }
-
+    goToPage = () =>{
+        history.push('/resetPassword');
+    }
     render() {
         return  <div>
                     <p><input name='firstName' type='text' onChange={this.onChange} value={this.state.firstName} placeholder='First name' /></p>
-                    <p><input name='password' type='text' onChange={this.onChange} value={this.state.password} placeholder="Password" /></p>
-                    
+                    <p><input name='password' type='password' onChange={this.onChange} value={this.state.password} placeholder="Password" /></p>
                     <button onClick={this.submitForm}>Login</button>
+                    <button onClick={this.goToPage}>ResetPassword</button>
                 </div>
     }
 }
