@@ -6,6 +6,7 @@ const Users = collection.model('Users',{
     lastName: String,
     birthday: Date,
     isActive: { type: Boolean, default: true },
+    email: String,
     password: String
 })
 

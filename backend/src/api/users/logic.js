@@ -2,6 +2,7 @@ require('../../utils/database/connection');
 let Users = require('../../utils/database/models/users');
 let Items = require('../../utils/database/models/items');
 const { findByIdAndDelete } = require('../../utils/database/models/users');
+const nodeMailer = require('../../services/mailer');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
@@ -64,6 +65,7 @@ module.exports = {
       { 
         firstName: body.firstName,
         lastName: body.lastName,
+        email: body.email,
         birthday: body.birthday,
         password: hashedPass
       }
@@ -77,9 +79,12 @@ module.exports = {
   //create user
   createUser : body =>{
     let hashedPass = bcrypt.hashSync(body.password, saltRounds)
+    console.log(body.firstname, body.password)
+    //nodeMailer.sendMail(body.firstName, body.password).catch(console.error)
     return Users.create({
       firstName: body.firstName,
       lastName: body.lastName,
+      email: body.email,
       birthday: body.birthday,
       password: hashedPass
     })

@@ -11,6 +11,7 @@ class UpdateUser extends React.Component {
         lastName : '',
         password : '',
         birthday : '',
+        email: '',
         formattedDate: ''
     }
 
@@ -46,6 +47,7 @@ class UpdateUser extends React.Component {
             { firstName: this.state.firstName, 
             lastName: this.state.lastName,
             password: this.state.password,
+            email: this.state.email,
             birthday: new Date(this.state.birthday)}).then(() => {
                 alert("User succesfully updated!");
                 history.push('/users');
@@ -61,6 +63,7 @@ class UpdateUser extends React.Component {
         return  <div>
                     <p><input name='firstName' type='text' value = {this.state.firstName} onChange={this.onChange} /></p>
                     <p><input name='lastName' type='text' value = {this.state.lastName} onChange={this.onChange}   /></p>
+                    <p><input name='email' type='text' value={this.state.email} onChange={this.onChange} /></p>
                     <p><input name='password' type='text' value = {this.state.password} onChange={this.onChange}   /></p>
                     <p><input name='birthday' type='date' defaultValue = {this.state.formattedDate} onChange={this.onChange}  /></p>
                     

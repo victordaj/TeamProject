@@ -46,7 +46,7 @@ class UserList  extends React.Component {
                         <TableRow>
                             <TableCell>First Name</TableCell>
                             <TableCell align="right">Last Name</TableCell>
-                            <TableCell align="right">Password</TableCell>
+                            <TableCell align="right">Email</TableCell>
                             <TableCell align="right">Birthday</TableCell>
                             <TableCell align="right">isActive</TableCell>
                             <TableCell align="right">Delete</TableCell>
@@ -59,7 +59,7 @@ class UserList  extends React.Component {
                             <TableRow key = {user.firstName}>
                                 <TableCell component ="th" scope = "user">{user.firstName}</TableCell>
                                 <TableCell align="right">{user.lastName}</TableCell>
-                                <TableCell align="right">{user.password}</TableCell>
+                                <TableCell align="right">{user.email}</TableCell>
                                 <TableCell align="right">{this.formatDate(new Date(user.birthday))}</TableCell>
                                 <TableCell align="right">{user.isActive.toString()}</TableCell>
                                 <TableCell align="right"><button onClick={() => this.props.onDelete(user._id)}> Delete </button></TableCell>
