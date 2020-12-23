@@ -11,7 +11,7 @@ class ResetPassword extends React.Component {
         newPasswordRepeat : ''
       }
     getUsers = () => {
-        axios.get('/users/').then(response => {
+        axios.get('/reset/').then(response => {
           this.setState({users:response.data })
         }).catch(err => {
           console.log('eroare');
@@ -33,7 +33,7 @@ class ResetPassword extends React.Component {
                     console.log(element.password)
                     console.log(this.state.oldPassword)
                         if(this.state.newPassword === this.state.newPasswordRepeat){
-                            axios.put('/users/reset/' + element._id,{password : this.state.newPassword}).then(()=>{
+                            axios.put('/reset/' + element._id,{password : this.state.newPassword}).then(()=>{
                                 alert("Password succesfully reseted")
                                 history.push('/login')
                             }).catch(err => {
