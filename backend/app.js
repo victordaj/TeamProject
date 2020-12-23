@@ -8,6 +8,7 @@ const session = require('express-session');
 
 var usersRouter = require('./src/api/users/users');
 var loginRouter = require('./src/api/login/login');
+var resetRouter = require('./src/api/resetPass/resetPass');
 var itemsRouter = require('./src/api/items/items');
 
 var app = express();
@@ -40,6 +41,7 @@ isLogged = (req, res, next) => {
 
 app.get('/logout', (req, res) => { console.log(req.session.name), req.session.destroy(), res.end("destroyed")})
 app.use('/login', loginRouter);
+app.use('/reset',resetRouter);
 app.use(isLogged);
 app.use('/isLogged', (req, res) => { 
   if(isLogged)
