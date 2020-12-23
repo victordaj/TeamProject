@@ -1,6 +1,8 @@
 require('../../utils/database/connection');
 let Items = require('../../utils/database/models/items');
 let Users = require('../../utils/database/models/users');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 module.exports = {
   resetUserPassword :(id,body) =>{
