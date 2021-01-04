@@ -10,8 +10,8 @@ let error = err => {
 
 
   //Request to reset password
-router.put('/:USERS_ID', function(req, res, next){
-    logic.resetUserPassword(req.params.USERS_ID,req.body).then(() => {
+router.put('/:USERS_NAME', function(req, res, next){
+    logic.resetUserPassword(req.params.USERS_NAME,req.body).then(() => {
       res.end("Password succsefully reseted")
     }).catch(err => {
       return error(err)

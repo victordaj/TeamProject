@@ -64,7 +64,7 @@ class UpdateUser extends React.Component {
                     <p><input name='firstName' type='text' value = {this.state.firstName} onChange={this.onChange} /></p>
                     <p><input name='lastName' type='text' value = {this.state.lastName} onChange={this.onChange}   /></p>
                     <p><input name='email' type='text' value={this.state.email} onChange={this.onChange} /></p>
-                    <p><input name='password' type='text' value = {this.state.password} onChange={this.onChange}   /></p>
+                    <p><input name='password' type='text' placeholder='New password' onChange={this.onChange}   /></p>
                     <p><input name='birthday' type='date' defaultValue = {this.state.formattedDate} onChange={this.onChange}  /></p>
                     
                     <button onClick={this.submitForm}>Submit</button>

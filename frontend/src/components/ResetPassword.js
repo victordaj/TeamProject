@@ -4,7 +4,6 @@ import history from '../utils/history';
 
 class ResetPassword extends React.Component {
     state = {
-        users : [],
         firstName :'',
         oldPassword : '',
         newPassword : '',
@@ -28,20 +27,14 @@ class ResetPassword extends React.Component {
     submitForm = () => {
         console.log("State: ", this.state)
         if(this.state.firstName && this.state.oldPassword && this.state.newPassword && this.state.newPasswordRepeat){
-            this.state.users.forEach(element => {
-                if(element.firstName === this.state.firstName){
-                    console.log("Password: ", element.password)
-                    console.log("Old password: ", this.state.oldPassword)
-                        if(this.state.newPassword === this.state.newPasswordRepeat){
-                            axios.put('/reset/' + element._id,{password : this.state.newPassword}).then(()=>{
-                                alert("Password succesfully reseted")
-                                history.push('/login')
-                            }).catch(err => {
-                                console.log(err);
-                            })
-                        }else{alert("Check new password")}
-                }else{ alert("The user does not exist"); }
-            })
+            if(this.state.newPassword === this.state.newPasswordRepeat){
+                axios.put('/reset/' + this.state.firstName,{password : this.state.newPassword}).then(()=>{
+                    alert("Password succesfully reseted")
+                    history.push('/login')
+                }).catch(err => {
+                    console.log(err);
+                })
+            }else{alert("Check new password")}
         }else{alert("Please complete all the fields") }
     }
     render() { 
