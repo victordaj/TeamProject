@@ -6,15 +6,27 @@ services:
     depends_on:
       - db
     container_name: project-backend
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - ./backend:/app 
 
   client:
     build: ./frontend
     ports:
       - "3000:3000"
     container_name: project-frontend
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
+    
 
   db:
     image: mongo
     ports:
       - "27017:27017"
     container_name: project-db
+    volumes: 
+      - ./mongo/data:/data/db

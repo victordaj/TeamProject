@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 
 module.exports = {
-    sendMail : async (user, password) => {
+    sendMail : async () => {
 
         const transporter = nodemailer.createTransport({
             host: 'smtp.ethereal.email',
@@ -12,11 +12,6 @@ module.exports = {
             }
         });
 
-        let info = await transporter.sendMail({
-            from: '"Our application" <ourapp@mail.com>',
-            to: 'karl.hudson12@ethereal.email',
-            subject: "Credentials",
-            text: "User: " + user + " Password: " + password
-        })
+        let info = await transporter.sendMail({options})
     }
 }

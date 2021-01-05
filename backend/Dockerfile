@@ -7,4 +7,4 @@ COPY . /app
 
 EXPOSE 8000
 USER node
-CMD ["node", "app.js"]
+CMD ["nodemon", "app.js"]
