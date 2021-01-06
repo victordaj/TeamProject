@@ -1,0 +1,25 @@
+services:
+  api:
+    build: ./backend/server
+    depends_on:
+      - db
+    container_name: project-backend
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - ./backend:/app/server
+
+  db:
+    image: mongo
+    container_name: project-db
+    volumes: 
+      - ./mongo/data:/data/db
+
+  nginx:
+    depends_on:
+      - api
+    restart: always
+    build:
+        context: ./backend/nginx
+    ports:
+        - "80:80"
